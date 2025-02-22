@@ -96,5 +96,5 @@ cover:
           payload: "S00110100110001S010111001S000111101S"
 
 waremacode_sender:
-  pin: 5 #GPIO05
+  pin: GPIO05
 ```

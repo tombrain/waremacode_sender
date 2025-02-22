@@ -23,7 +23,7 @@ namespace esphome
 
         void WaremacodeSenderComponent::dump_config()
         {
-            ESP_LOGCONFIG(TAG, "Used GPIO-Pin: %d", m_transmitterPin);
+            ESP_LOGCONFIG(TAG, "Used GPIO-Pin: %d", m_transmitterPin->get_pin());
             ESP_LOGCONFIG(TAG, "MQTT-Topic: %s", m_topic.c_str());
         }
 
@@ -33,7 +33,7 @@ namespace esphome
 
             if (payload.length() == 36)
             {
-                m_mySwitch.enableTransmit(m_transmitterPin);
+                m_mySwitch.enableTransmit(m_transmitterPin->get_pin());
                 m_mySwitch.sendMC(payload, m_dataLength, m_syncLength, m_sendCommand, m_sendDelay);
                 m_mySwitch.disableTransmit();
             }

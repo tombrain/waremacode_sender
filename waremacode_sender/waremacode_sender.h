@@ -21,7 +21,7 @@ namespace esphome
             // void loop() override;
             void dump_config() override;
 
-            void set_pin(int const &pin) { m_transmitterPin = pin; }
+            void set_pin(InternalGPIOPin *pin) { m_transmitterPin = pin; }
 
         private:
             void on_command_send_waremacode(const std::string &payload);
@@ -31,11 +31,11 @@ namespace esphome
             uint8_t m_sendCommand{3};
             unsigned int m_sendDelay{10000};
 
-            uint8_t m_transmitterPin{};
+            InternalGPIOPin *m_transmitterPin{nullptr};
 
             std::string m_topic{};
             RCSwitchWarema m_mySwitch{};
         };
 
-    } // namespace empty_component
+    } // namespace waremacode_sender
 } // namespace esphome
