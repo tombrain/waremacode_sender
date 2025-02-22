@@ -19,8 +19,6 @@ esphome
 
 esphome:
   name: waremacontrol
-  libraries:
-    - "rc-switch"
 
 external_components:
   - source: components

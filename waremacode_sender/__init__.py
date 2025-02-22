@@ -3,6 +3,9 @@ import esphome.config_validation as cv
 from esphome.const import CONF_ID, CONF_PIN
 from esphome import pins
 
+# Import the rc-switch library
+cg.add_library("rc-switch", "2.6.4")
+
 waremacode_sender_ns = cg.esphome_ns.namespace("waremacode_sender")
 WaremacodeSenderComponent = waremacode_sender_ns.class_("WaremacodeSenderComponent", cg.Component)
 
