@@ -5,51 +5,38 @@ namespace esphome
 {
     namespace waremacode_sender
     {
-        void RCSwitchWarema::sendMC(std::string const &sCodeWord, unsigned int const& dataLength, unsigned int const& syncLength, uint8_t const& numberOfTransmissions, unsigned int const& sendDelay)
+        void RCSwitchWarema::sendMC(std::string const &codeWord, unsigned int const& dataLength, unsigned int const& syncLength, uint8_t const& numberOfTransmissions, unsigned int const& sendDelay)
         {
             ESP_LOGD("RCSwitchWarema", "sendMC: %s, %i, %i, %i, %i",
-                     sCodeWord.c_str(),
+                     codeWord.c_str(),
                      dataLength,
                      syncLength,
                      numberOfTransmissions,
                      sendDelay);
 
             auto const halfDataLength{dataLength / 2};
-            for (uint8_t nRepeat{0}; nRepeat < numberOfTransmissions; ++nRepeat)
+            for (uint8_t repeat{0}; repeat < numberOfTransmissions; ++repeat)
             {
                 digitalWrite(m_transmitterPin, LOW);
 
-                for (auto const &c : sCodeWord)
+                for (auto const &c : codeWord)
                 {
-                    switch (c)
+                    if (c == 's' || c == 'S')
                     {
-                    case 's':
-                        digitalWrite(m_transmitterPin, LOW);
+                        digitalWrite(m_transmitterPin, (c == 's') ? LOW : HIGH);
                         delayMicroseconds(syncLength);
-                        break;
-
-                    case 'S':
-                        digitalWrite(m_transmitterPin, HIGH);
-                        delayMicroseconds(syncLength);
-                        break;
-
-                    case '0':
-                        digitalWrite(m_transmitterPin, HIGH);
+                    }
+                    else if (c == '0' || c == '1')
+                    {
+                        bool isZero = (c == '0');
+                        digitalWrite(m_transmitterPin, isZero ? HIGH : LOW);
                         delayMicroseconds(halfDataLength);
-                        digitalWrite(m_transmitterPin, LOW);
+                        digitalWrite(m_transmitterPin, isZero ? LOW : HIGH);
                         delayMicroseconds(halfDataLength);
-                        break;
-
-                    case '1':
-                        digitalWrite(m_transmitterPin, LOW);
-                        delayMicroseconds(halfDataLength);
-                        digitalWrite(m_transmitterPin, HIGH);
-                        delayMicroseconds(halfDataLength);
-                        break;
                     }
                 }
-                digitalWrite(this->m_transmitterPin, LOW);
-                if (nRepeat != numberOfTransmissions - 1)
+                digitalWrite(m_transmitterPin, LOW);
+                if (repeat != numberOfTransmissions - 1)
                 {
                     delayMicroseconds(sendDelay);
                 }
@@ -57,12 +44,12 @@ namespace esphome
             ESP_LOGD("RCSwitchWarema", "sendMC: ready");
         }
 
-        void RCSwitchWarema::enableTransmit(int nTransmitterPin)
+        void RCSwitchWarema::enableTransmit(int const& transmitterPin)
         {
-            ESP_LOGI("RCSwitchWarema", "enableTransmit: %d", nTransmitterPin);
-            m_transmitterPin = nTransmitterPin;
+            ESP_LOGI("RCSwitchWarema", "enableTransmit: %d", transmitterPin);
+            m_transmitterPin = transmitterPin;
 
-            Base::enableTransmit(nTransmitterPin);
+            Base::enableTransmit(transmitterPin);
         }
 
     } // namespace waremacode_sender
