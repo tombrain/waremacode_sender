@@ -4,7 +4,6 @@
 #include "esphome/core/gpio.h"
 
 #include "esphome/components/mqtt/custom_mqtt_device.h"
-// #include "esphome/components/binary_sensor/binary_sensor.h"
 
 #include "RCSwitchWarema.h"
 
@@ -22,14 +21,10 @@ namespace esphome
             // void loop() override;
             void dump_config() override;
 
-            void set_pin(InternalGPIOPin *pin) { pin_ = pin; }
             void set_pin(int const &pin) { m_transmitterPin = pin; }
 
         private:
-            void on_command_waremasend(const std::string &payload);
-            void on_command_waremasend_json(const std::string &payload);
-            void on_command_raw433(const std::string &payload);
-            void on_json_message(JsonObject &root);
+            void on_command_send_waremacode(const std::string &payload);
 
             unsigned int m_dataLength{1780};
             unsigned int m_syncLength{5000};
@@ -37,8 +32,8 @@ namespace esphome
             unsigned int m_sendDelay{10000};
 
             uint8_t m_transmitterPin{};
-            InternalGPIOPin *pin_;
-            std::string m_topicBase{};
+
+            std::string m_topic{};
             RCSwitchWarema m_mySwitch{};
         };
 
