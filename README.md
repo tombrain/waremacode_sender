@@ -3,13 +3,14 @@ How ot use: https://github.com/jesserockz/esphome-external-component-examples
 Structure of files:
 
 ```
-components
-├── waremacode_sender
-│   ├── __init__.py
-│   ├── RCSwitchWarema.cpp
-│   ├── RCSwitchWarema.h
-│   ├── waremacode_sender.cpp
-│   ├── waremacode_sender.h
+esphome
+├── components
+|   ├── waremacode_sender
+|   │   ├── __init__.py
+|   │   ├── RCSwitchWarema.cpp
+|   │   ├── RCSwitchWarema.h
+|   │   ├── waremacode_sender.cpp
+|   │   ├── waremacode_sender.h
 │  ...
 ```
 
