@@ -98,4 +98,5 @@ cover:
 
 waremacode_sender:
   pin: GPIO05
+  number_of_transmissions: 5
 ```

@@ -13,12 +13,18 @@ namespace esphome
             using Base = RCSwitch;
 
         public:
-            void sendMC(std::string const &sCodeWord, unsigned int dataLength, unsigned int syncLength, uint8_t sendCommand, unsigned int sendDelay);
+            /// @brief sends a warema master code
+            /// @param sCodeWord code word to send
+            /// @param dataLength data length
+            /// @param syncLength sync length
+            /// @param numberOfTransmissions  number of transmissions
+            /// @param sendDelay send delay
+            void sendMC(std::string const &sCodeWord, unsigned int const& dataLength, unsigned int const& syncLength, uint8_t const& numberOfTransmissions, unsigned int const& sendDelay);
             void enableTransmit(int nTransmitterPin);
 
         private:
             int m_transmitterPin{};
         };
 
-    } // namespace empty_component
+    } // namespace waremacode_sender
 } // namespace esphome
