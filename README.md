@@ -22,6 +22,9 @@ esphome:
   libraries:
     - "rc-switch"
 
+external_components:
+  - source: components
+  
 esp8266:
   board: nodemcuv2
 
