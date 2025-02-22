@@ -5,7 +5,7 @@ namespace esphome
 {
     namespace waremacode_sender
     {
-        void RCSwitchWarema::sendMC(std::string const &codeWord, unsigned int const& dataLength, unsigned int const& syncLength, uint8_t const& numberOfTransmissions, unsigned int const& sendDelay)
+        void RCSwitchWarema::sendMC(std::string const &codeWord, unsigned int const &dataLength, unsigned int const &syncLength, uint8_t const &numberOfTransmissions, unsigned int const &sendDelay)
         {
             ESP_LOGD("RCSwitchWarema", "sendMC: %s, %i, %i, %i, %i",
                      codeWord.c_str(),
@@ -28,7 +28,7 @@ namespace esphome
                     }
                     else if (c == '0' || c == '1')
                     {
-                        bool isZero = (c == '0');
+                        auto const isZero{c == '0'};
                         digitalWrite(m_transmitterPin, isZero ? HIGH : LOW);
                         delayMicroseconds(halfDataLength);
                         digitalWrite(m_transmitterPin, isZero ? LOW : HIGH);
@@ -44,7 +44,7 @@ namespace esphome
             ESP_LOGD("RCSwitchWarema", "sendMC: ready");
         }
 
-        void RCSwitchWarema::enableTransmit(int const& transmitterPin)
+        void RCSwitchWarema::enableTransmit(int const &transmitterPin)
         {
             ESP_LOGI("RCSwitchWarema", "enableTransmit: %d", transmitterPin);
             m_transmitterPin = transmitterPin;

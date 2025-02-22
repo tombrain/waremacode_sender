@@ -19,8 +19,8 @@ namespace esphome
             /// @param syncLength sync length
             /// @param numberOfTransmissions number of transmissions
             /// @param sendDelay send delay
-            void sendMC(std::string const &codeWord, unsigned int const& dataLength, unsigned int const& syncLength, uint8_t const& numberOfTransmissions, unsigned int const& sendDelay);
-            void enableTransmit(int const& transmitterPin);
+            void sendMC(std::string const &codeWord, unsigned int const &dataLength, unsigned int const &syncLength, uint8_t const &numberOfTransmissions, unsigned int const &sendDelay);
+            void enableTransmit(int const &transmitterPin);
 
         private:
             int m_transmitterPin{};
