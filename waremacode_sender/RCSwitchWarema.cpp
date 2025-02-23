@@ -46,7 +46,7 @@ namespace esphome
 
         void RCSwitchWarema::enableTransmit(int const &transmitterPin)
         {
-            ESP_LOGI("RCSwitchWarema", "enableTransmit: %d", transmitterPin);
+            ESP_LOGD("RCSwitchWarema", "enableTransmit: %d", transmitterPin);
             m_transmitterPin = transmitterPin;
 
             Base::enableTransmit(transmitterPin);
